@@ -1,11 +1,16 @@
 
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import AdminProfile from './components/adminProfile/adminProfile';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Ecommerce Admin</h1>
-    </div>
+    <>
+      <Routes>
+        {/* <Route path="/" element={< />} /> */}
+        <Route path="/admin" element={<AdminProfile />} />
+      </Routes>
+    </>
   );
 }
 
