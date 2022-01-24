@@ -1,0 +1,58 @@
+.titleRow button:first-child {
+  margin-right: 5px;
+}
+
+.productsList .productContent {
+  position: relative;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
+  max-width: 100%;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+
+.productsList .productContent:hover {
+  -webkit-box-shadow: 0px 4px 6px 0px rgba(204, 204, 204, 0.5);
+          box-shadow: 0px 4px 6px 0px rgba(204, 204, 204, 0.5);
+}
+
+.productsList .productContent a {
+  display: block;
+  text-decoration: none;
+}
+
+.productsList .productContent img {
+  max-width: 100%;
+  max-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.productsList .productContent b {
+  font-size: 18px;
+}
+
+.productsList .productContent h6 {
+  font-size: 16px;
+}
+
+.productsList .productContent small {
+  color: var(--colors-gray);
+}
+
+.productsList .productActions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.productsList .productActions button {
+  margin: 3px;
+  width: 25px;
+  min-width: unset;
+}
+/*# sourceMappingURL=productsList.css.map */
