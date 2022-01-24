@@ -4,17 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Signup from './components/signup';
-import Login from './components/login';
+
 ReactDOM.render(
   <React.StrictMode>
-
     <BrowserRouter>
       <App />
-      <Signup/>
-      <Login/>
     </BrowserRouter>
-    
   </React.StrictMode>,
   document.getElementById('root')
 );

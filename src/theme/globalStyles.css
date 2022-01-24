@@ -1,0 +1,11 @@
+:root{
+  --colors-darkBlue: #3a4d75;
+  --colors-lightBlue: #3a4d75;
+  --colors-contrastBlue: #277ffd;
+  --colors-lightBlue: #f2f4ff;
+  --colors-gray: #9496a2;
+  --colors-lightGray: #a6aaac;
+}
+
+/* @import url('./productsList.css'); */
+
