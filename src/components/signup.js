@@ -23,7 +23,7 @@ function Signup() {
   <Button color="primary" type="submit" variant="contained" fullWidth>Sign Up</Button>
  <Typography >
 Do you have an account ?
-<Link href="#Login"> Log In</Link>     
+<Link href="/Login"> Log In</Link>     
  </Typography>
     </Paper>
 </Grid> </div>
