@@ -19,7 +19,7 @@ function Login() {
   const { register, handleSubmit } = useForm();
   //
   const onSubmit = (data) => {
-    axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.padding}` })
+    axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.password}` })
       .then((response) => {
         console.log(response);
       });
