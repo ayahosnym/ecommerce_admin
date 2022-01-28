@@ -11,10 +11,11 @@ import {
     Grid,
     Link
     } from '@mui/material';
+
 import Title from "../common/pageTitle";
 
 
-function ProductsList() {
+function ProductsList( {logout} ) {
 
     const [hover, setHover] = useState(false);
     const [products, setProducts] = useState([

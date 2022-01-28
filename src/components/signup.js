@@ -23,6 +23,7 @@ function Signup() {
   }
 
   return (
+
     <div style={bgStyle}>
       <Grid >
         <Paper elevation={10} style={paperStyle}>
@@ -48,6 +49,8 @@ function Signup() {
         </Paper>
       </Grid>
     </div>
+
+
   );
 }
 

@@ -8,11 +8,12 @@ import axios from "axios";
 import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form";
 
-function Login() {
+function Login({autenticate}) {
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: 'auto' }
   const avatarStyle = { backgroundColor: "#3F51B5" }
   const mr = { marginBottom: "20px" }
   const bgStyle = { backgroundColor: "aliceblue", height: "100vh", paddingTop: '50px' }
+
 
   // functionality 
   const navigate = useNavigate();
@@ -23,9 +24,10 @@ function Login() {
       .then((response) => {
         console.log(response);
       });
+      autenticate();
     //redirect after login
     navigate('/products', { replace: true })
-
+    
   }
 
   return (
@@ -52,6 +54,7 @@ function Login() {
         </Paper>
       </Grid>
     </div>
+
   );
 }
 
