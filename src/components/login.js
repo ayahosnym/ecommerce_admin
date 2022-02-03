@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Avatar, Grid, Paper, TextField, Button, Typography, Link } from "@material-ui/core";
 // import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -7,26 +7,41 @@ import Checkbox from '@material-ui/core/Checkbox';
 import axios from "axios";
 import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form";
+import { UserContext } from '../UserContext';
+import { AuthContext } from '../AuthContext';
 
-function Login({autenticate}) {
+function Login() {
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: 'auto' }
   const avatarStyle = { backgroundColor: "#3F51B5" }
   const mr = { marginBottom: "20px" }
   const bgStyle = { backgroundColor: "aliceblue", height: "100vh", paddingTop: '50px' }
 
 
+  const  {login, user}  = useContext(UserContext);
+  const  {auth, authenticate}  = useContext(AuthContext);
+
   // functionality 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   //
-  const onSubmit = (data) => {
-    axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.password}` })
-      .then((response) => {
-        console.log(response);
-      });
-      autenticate();
-    //redirect after login
-    navigate('/products', { replace: true })
+
+  let onSubmit = async (data) => {
+  let res =  await axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.password}` })
+      .then(response => response);
+      
+      if(res.status === 201){
+        console.log("res.data");
+        console.log(res.data);
+
+        login(res.data);
+        authenticate();
+        //redirect after login
+        navigate('/products');
+      }else{
+        console.log("weeeeee");
+      }
+    
+    
     
   }
 

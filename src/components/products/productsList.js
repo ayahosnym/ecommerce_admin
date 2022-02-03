@@ -1,8 +1,10 @@
 import React from 'react';
-import { useState,  useEffect} from 'react';
+import { useState,  useEffect, useContext } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import '../../theme/productsList.css';
+import { UserContext } from '../../UserContext';
+
 import {
     Container,
     Box,
@@ -17,6 +19,9 @@ import Title from "../common/pageTitle";
 
 function ProductsList( {logout} ) {
 
+
+    const { user } = useContext(UserContext);
+  
     const [hover, setHover] = useState(false);
     const [products, setProducts] = useState([
         {
@@ -88,7 +93,7 @@ function ProductsList( {logout} ) {
         //    setProducts(data.languages)
         // });
 
-        console.log(hover);
+
     }, [hover]);
     return (
         <Container maxWidth="lg">

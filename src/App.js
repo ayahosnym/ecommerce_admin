@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import './App.css';
 import './theme/globalStyles.css';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,53 +12,58 @@ import Categories from './components/categories/categoriesList';
 import Header from './components/common/header';
 import Footer from './components/common/footer';
 
-
+import { UserProvider } from './UserContext';
+import { AuthContext } from './AuthContext';
 function App() {
 
-  const [user, setUser] = useState(null);
-
+ 
+  const { auth } = useContext(AuthContext);
   return (
-    <div className="App">
-
-      <CssBaseline />
-
-      {/* START COMMON COMPONENT */}
-      {user && (
-        <Header logout={ () => setUser(false) }/>
-      )}
-      {/* END COMMON COMPONENT */}
-
-
-
-      {/* START ROUTES */}
-      <Routes>
-
-        {!user && (
-          <>
-            <Route path="/login" element={<Login autenticate={() => setUser(true)}/>} />
-            <Route path="/signup" element={<Signup />} />
-           </>
-        )}
-        {user && (
-          <>
-            <Route path="/category" element={<Categories />} />
-            <Route path="/products" element={<Products/>} />
-            <Route path="/profile" element={<AdminProfile />} />
-          </>
-        )}
-        <Route path="*" element={<Navigate to={ user? "/products" : "/login"} />}/>
-
-      </Routes>
-       {/* END ROUTES */}
-
-
-
+    
+    <UserProvider>
+      
+      <div className="App">
+        <CssBaseline />
+        
         {/* START COMMON COMPONENT */}
-      {user && (
-        <Footer/>
-      )}
-      {/* END COMMON COMPONENT */}
-    </div>
+        {auth && (
+          <Header/>
+        )}
+        {/* END COMMON COMPONENT */}
+
+
+
+        {/* START ROUTES */}
+        <Routes>
+
+          {!auth && (
+            <>
+              <Route path="/login" element={<Login/>} />
+              <Route path="/signup" element={<Signup />} />
+            </>
+          )}
+          {auth && (
+            <>
+              <Route path="/category" element={<Categories />} />
+              <Route path="/products" element={<Products/>} />
+              <Route path="/profile" element={<AdminProfile />} />
+            </>
+          )}
+          <Route path="*" element={<Navigate to={ auth? "/products" : "/login"} />}/>
+
+        </Routes>
+        {/* END ROUTES */}
+
+
+
+          {/* START COMMON COMPONENT */}
+        {auth && (
+          <Footer/>
+        )}
+        {/* END COMMON COMPONENT */}
+      </div>
+
+    </UserProvider>
   );
 }
 
