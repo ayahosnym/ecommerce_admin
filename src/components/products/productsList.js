@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState,  useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import '../../theme/productsList.css';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../context/UserContext';
 
 import {
     Container,
@@ -12,16 +12,16 @@ import {
     Typography,
     Grid,
     Link
-    } from '@mui/material';
+} from '@mui/material';
 
 import Title from "../common/pageTitle";
 
 
-function ProductsList( {logout} ) {
+function ProductsList({ logout }) {
 
 
     const { user } = useContext(UserContext);
-  
+
     const [hover, setHover] = useState(false);
     const [products, setProducts] = useState([
         {
@@ -109,7 +109,7 @@ function ProductsList( {logout} ) {
                 }}
             >
                 <div>
-                    <Title text="All Products"/>
+                    <Title text="All Products" />
                 </div>
                 <div>
                     <Button variant="outlined">
@@ -121,39 +121,39 @@ function ProductsList( {logout} ) {
                 </div>
 
             </Box>
-            
+
             {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
             <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className="productsList">
                 {products.map((product) => (
                     <Grid key={product.id} item xs={12} sm={6} md={3} className="productBox">
                         <div className="productContent" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                             <Link href="#" color="inherit">
-                                <img src={`http://localhost:3000`+product.image} alt="product img"/>
+                                <img src={`http://localhost:3000` + product.image} alt="product img" />
                                 <b>${product.price}</b>
-                                <Typography variant="h6"  align="left">{product.name + product.id}</Typography>
+                                <Typography variant="h6" align="left">{product.name + product.id}</Typography>
                                 <small>{product.category.name}</small>
                             </Link>
-                            { hover ? 
+                            {hover ?
                                 <div className='productActions'>
                                     <Button variant="outlined">
                                         <DeleteIcon />
                                     </Button>
                                     <Button variant="outlined">
-                                        <EditIcon/>
+                                        <EditIcon />
                                     </Button>
                                 </div>
-                            : null }
-                           
+                                : null}
+
                         </div>
-                        
+
                     </Grid>
                 ))}
-     
+
 
             </Grid>
 
-                {/* <Button variant="contained">Hello World</Button> */}
-            
+            {/* <Button variant="contained">Hello World</Button> */}
+
         </Container>
     )
 }

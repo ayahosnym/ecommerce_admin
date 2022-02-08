@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,18 +13,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import {Link} from '@mui/material';
+import { Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../context/UserContext';
 const pages = ['Products', 'Profile', 'Category'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
-    
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
-  const {logout } = useContext(UserContext);
+  const { logout } = useContext(UserContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,19 +33,21 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (e,page) => {
-    
+  const handleCloseNavMenu = (e, page) => {
+
     setAnchorElNav(null);
     navigate(`/${page}`);
   };
 
-  const handleCloseUserMenu = (e,setting) => {
+  const handleCloseUserMenu = (e, setting) => {
     setAnchorElUser(null);
-    if(setting == "Logout"){
-        logout();
+    if (setting === "Logout") {
+      logout();
+      toast.success("You logged out successfully")
+      navigate("/login");
 
-    }else if(setting == 'Profile'){
-        navigate("/profile");
+    } else if (setting === 'Profile') {
+      navigate("/profile");
     }
   };
 
@@ -109,7 +112,7 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={(e) => handleCloseNavMenu(e,page)}
+                onClick={(e) => handleCloseNavMenu(e, page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -140,7 +143,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={(e) => handleCloseUserMenu(e,setting)}>
+                <MenuItem key={setting} onClick={(e) => handleCloseUserMenu(e, setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

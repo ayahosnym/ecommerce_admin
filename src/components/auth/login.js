@@ -1,14 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Avatar, Grid, Paper, TextField, Button, Typography, Link } from "@material-ui/core";
-// import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { toast } from 'react-toastify';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from "axios";
 import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form";
-import { UserContext } from '../UserContext';
-import { AuthContext } from '../AuthContext';
+import { UserContext } from '../../context/UserContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function Login() {
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: 'auto' }
@@ -17,8 +17,8 @@ function Login() {
   const bgStyle = { backgroundColor: "aliceblue", height: "100vh", paddingTop: '50px' }
 
 
-  const  {login, user}  = useContext(UserContext);
-  const  {auth, authenticate}  = useContext(AuthContext);
+  const { login, user } = useContext(UserContext);
+  const { auth, authenticate } = useContext(AuthContext);
 
   // functionality 
   const navigate = useNavigate();
@@ -26,27 +26,27 @@ function Login() {
   //
 
   let onSubmit = async (data) => {
-  let res =  await axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.password}` })
+    let res = await axios.post("https://products-tohw.herokuapp.com/auth/login",
+      { 'username': `${data.username}`, 'password': `${data.password}` })
       .then(response => response);
-      
-      if(res.status === 201){
-        console.log("res.data");
-        console.log(res.data);
 
-        login(res.data);
-        authenticate();
-        //redirect after login
-        navigate('/products');
-      }else{
-        console.log("weeeeee");
-      }
-    
-    
-    
+    if (res.status === 201) {
+      login(res.data);
+      authenticate();
+      //redirect after login
+      navigate('/products');
+      toast.success("You logged in successfully")
+    } else {
+      toast.error("Opps, something went wrong! please try agian")
+    }
+
+
+
   }
 
   return (
     <div style={bgStyle}>
+
       <Grid >
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center" >

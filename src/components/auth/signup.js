@@ -18,7 +18,10 @@ function Signup() {
 
   const URL = "https://products-tohw.herokuapp.com/auth/signup";
   const onSubmit = (data) => {
-    axios.post(URL, { ...data, avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" })
+    axios.post(URL, {
+      ...data,
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+    })
     reset({})
   }
 
@@ -36,9 +39,7 @@ function Signup() {
             <TextField {...register("username")} style={mr} label="Username" placeholder="Enter username" fullWidth required />
             <TextField {...register("password")} style={mr} label="Password" placeholder="Enter password" type='password' fullWidth required />
             <TextField {...register("role")} style={mr} label="Role" placeholder="Enter Role" fullWidth required />
-            <Button color="primary" type="submit" variant="contained" fullWidth
-            // onClick={() => console.log("hello")}
-            >
+            <Button color="primary" type="submit" variant="contained" fullWidth >
               Sign Up
             </Button>
           </form>
