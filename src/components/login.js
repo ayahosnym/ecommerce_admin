@@ -18,15 +18,26 @@ function Login({autenticate}) {
   // functionality 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const [error,setError] = useState("");
   //
   const onSubmit = (data) => {
     axios.post("https://products-tohw.herokuapp.com/auth/login", { 'username': `${data.username}`, 'password': `${data.password}` })
       .then((response) => {
         console.log(response);
+        if(response){
+          autenticate();
+          navigate('/products', { replace: true });
+        }
+      }).catch(error => {
+        if (error.response.status === 401)  {
+          // console.log(error.response.data.message);
+          setError( error.response.data.message)
+        }
       });
-      autenticate();
-    //redirect after login
-    navigate('/products', { replace: true })
+      
+    //   autenticate();
+    // //redirect after login
+    // navigate('/products', { replace: true })
     
   }
 
@@ -41,6 +52,7 @@ function Login({autenticate}) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField {...register("username")} style={mr} label="Username" placeholder="Enter username" type="text" fullWidth required />
             <TextField {...register("password")} label="Password" placeholder="Enter password" type='text' fullWidth required />
+            <small style={{"color":"red"}}>{error}</small>
             <FormControlLabel style={mr}
               control={<Checkbox name="checkedB" color="primary" />}
               label="Remember me" />

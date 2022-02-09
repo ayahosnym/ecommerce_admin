@@ -38,9 +38,9 @@ const ResponsiveAppBar = ({logout}) => {
 
   const handleCloseUserMenu = (e,setting) => {
     setAnchorElUser(null);
-    if(setting == "Logout"){
+    if(setting === "Logout"){
         logout();
-    }else if(setting == 'Profile'){
+    }else if(setting === 'Profile'){
         navigate("/profile");
     }
   };

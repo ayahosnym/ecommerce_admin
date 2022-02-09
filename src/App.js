@@ -7,7 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from './components/login';
 import Signup from './components/signup';
 import AdminProfile from './components/adminProfile/adminProfile';
-import Products from "./components/products/productsList";
+import ProductsList from "./components/products/productsList";
 import Categories from './components/categories/categoriesList';
 import Header from './components/common/header';
 import Footer from './components/common/footer';
@@ -37,13 +37,14 @@ function App() {
           <>
             <Route path="/login" element={<Login autenticate={() => setUser(true)}/>} />
             <Route path="/signup" element={<Signup />} />
-           </>
+          </>
         )}
         {user && (
           <>
             <Route path="/category" element={<Categories />} />
-            <Route path="/products" element={<Products/>} />
+            <Route path="/products" element={<ProductsList/>} />
             <Route path="/profile" element={<AdminProfile />} />
+            
           </>
         )}
         <Route path="*" element={<Navigate to={ user? "/products" : "/login"} />}/>
